@@ -1,0 +1,30 @@
+{
+  "name": "less-offset-comments",
+  "version": "1.0.0-beta.1",
+  "description": "Angular v4+ directive for less offset in nested comments",
+  "main": "dist/index",
+  "typings": "src/index",
+  "directories": {
+    "lib": "src"
+  },
+  "format": "es2015",
+  "homepage": "https://github.com/KostyaTretyak/less-offset-comments",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/KostyaTretyak/less-offset-comments.git"
+  },
+  "bugs": {
+    "url": "https://github.com/KostyaTretyak/less-offset-comments/issues"
+  },
+  "devDependencies": {
+    "@angular/core": "^5.0.2",
+    "typescript": "^2.5.3"
+  },
+  "keywords": [
+    "ng",
+    "angular",
+    "nested-comments"
+  ],
+  "author": "Костя Третяк <ktretiak.in.ua@gmail.com>",
+  "license": "MIT"
+}
