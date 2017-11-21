@@ -25,6 +25,8 @@ export class LessOffsetCommentsDirective implements OnChanges
 
   ngOnChanges(simpleChanges: SimpleChanges)
   {
+    console.log(simpleChanges);
+
     if
     (
       simpleChanges.comments.currentValue
@@ -40,27 +42,49 @@ export class LessOffsetCommentsDirective implements OnChanges
    */
   setComment(parent: Comment, newChild: Comment, action: 'unshift' | 'push')
   {
-    const existChild1 = parent.children[0];
-
+    const child1 = parent.children[0];
     parent.children[action](newChild);
-
     this.checkComment(newChild);
 
-    if(existChild1)
+    if(child1)
     {
-      this.checkComment(existChild1);
-      const existChild2 = existChild1.children[0];
+      this.checkComment(child1);
+      const child2 = child1.children[0];
 
-      if(existChild2)
-        this.checkComment(existChild2);
+      if(child2)
+        this.checkComment(child2);
+    }
+  }
+
+  /**
+   * Видаляє конкретний коментар та оновлює зміщення сусідніх коментарів,
+   * враховуючи це видалення.
+   */
+  deleteComment(parent: Comment, index: number)
+  {
+    parent.children.splice(index, 1);
+    const child1 = parent.children[0];
+
+    if(child1)
+    {
+      child1.compactMode = true;
+      this.checkComment(child1);
+
+      const child2 = child1.children[0];
+      if(child2)
+      {
+        child2.compactMode = true;
+        this.checkComment(child2);
+      }
     }
   }
 
   /**
    * Перевіряє кожен із коментарів на правила для виходу з компактного режиму.
    * 
-   * Його потрібно використовувати для кожного із елементів в масиві коментарів при ініціалізації,
-   * а також при вибірковій перевірці, коли масив змінено.
+   * Використовується безпосередньо при ініціалізації масиву коментарів.
+   * При вставці або видаленні конкретного коментаря,
+   * необхідно використовувати відповідно setComment() та deleteComment().
    */
   checkComment(comment: Comment)
   {
