@@ -102,30 +102,35 @@ Example of usage:
 ```ts
 import { LessOffsetComments, Comment } from 'less-offset-comments';
 
-onInit()
+class MyComponent
 {
-  this.comments: Comment[] = getFromBackend();
+  comments: Comment[];
 
-  LessOffsetComments.init(this.comments);
-}
-
-onSubmit(parent: Comment)
-{
-  const child: Comment =
+  onInit()
   {
-    userId: 111111,
-    level: parent.level + 1,
-    parent: parent,
-    children: [],
-    compactMode: true
-  };
+    this.comments = getFromBackend();
 
-  LessOffsetComments.setComment(parent, child, 'unshift');
-}
+    LessOffsetComments.init(this.comments);
+  }
 
-onDelete(comment: Comment, index: number)
-{
-  LessOffsetComments.deleteComment(this.comments, comment, index);
+  onSubmit(parent: Comment)
+  {
+    const child: Comment =
+    {
+      userId: 111111,
+      level: parent.level + 1,
+      parent: parent,
+      children: [],
+      compactMode: true
+    };
+
+    LessOffsetComments.setComment(parent, child, 'unshift');
+  }
+
+  onDelete(comment: Comment, index: number)
+  {
+    LessOffsetComments.deleteComment(this.comments, comment, index);
+  }
 }
 
 ```
