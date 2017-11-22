@@ -102,7 +102,7 @@ Example of usage:
 ```ts
 import { LessOffsetComments, Comment } from 'less-offset-comments';
 
-OnInit()
+onInit()
 {
   this.comments: Comment[] = getFromBackend();
 

@@ -19,7 +19,7 @@ export interface Comment
 
 export class LessOffsetComments
 {
-  static init(comments: Comment[])
+  static init(comments: Comment[]): void
   {
     comments.forEach( this.checkComment.bind(this) );
   }
@@ -31,7 +31,7 @@ export class LessOffsetComments
    * @param newChild A new comment that will be inserted into `parent.children` array.
    * @param action An action that will be applied to the `parent.children` array.
    */
-  static setComment(parent: Comment, newChild: Comment, action: 'unshift' | 'push')
+  static setComment(parent: Comment, newChild: Comment, action: 'unshift' | 'push'): void
   {
     const child1 = parent.children[0];
     parent.children[action](newChild);
@@ -53,9 +53,10 @@ export class LessOffsetComments
    * 
    * @param comments Array of all comments. Required to remove root comments.
    * @param comment A comment for delete.
-   * @param index An index of comment in `parent.children` array for delete current comment.
+   * @param index An index of comment in `parent.children`
+   * or in `comments` array (if it is root comment) for delete current comment.
    */
-  static deleteComment(comments: Comment[], comment: Comment, index: number)
+  static deleteComment(comments: Comment[], comment: Comment, index: number): void
   {
     if(!comment)
     {
@@ -63,7 +64,8 @@ export class LessOffsetComments
     }
     else if(!comment.parent)
     {
-      return comments.splice(index, 1);
+      comments.splice(index, 1);
+      return;
     }
 
     comment.parent.children.splice(index, 1);
@@ -84,9 +86,9 @@ export class LessOffsetComments
   }
 
   /**
-   * Checks each comment on the rules for exiting "Compact Mode".
+   * Checks each comment on the rules for exiting from "Compact Mode".
    */
-  static checkComment(comment: Comment)
+  static checkComment(comment: Comment): void
   {
     if(comment.compactMode && comment.parent)
     {
