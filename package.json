@@ -1,7 +1,7 @@
 {
   "name": "less-offset-comments",
   "version": "1.0.0-beta.1",
-  "description": "Angular v4+ directive for less offset in nested comments",
+  "description": "This is utility for less offset in nested comments.",
   "main": "dist/index",
   "typings": "src/index",
   "directories": {
@@ -21,8 +21,7 @@
     "typescript": "^2.5.3"
   },
   "keywords": [
-    "ng",
-    "angular",
+    "comments",
     "nested-comments"
   ],
   "author": "Костя Третяк <ktretiak.in.ua@gmail.com>",

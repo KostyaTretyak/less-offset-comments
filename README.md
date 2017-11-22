@@ -53,6 +53,12 @@ What is the main idea here? Dialogs between two users may not be offseted.
 For all comments, this utility changes the property `compactMode` to `true` or to `false`.
 A developer should rely on this property when rendering the comments.
 
+## Install
+
+```bash
+npm install less-offset-comments --save
+```
+
 ## API
 
 ### Comments interface
@@ -98,7 +104,7 @@ import { LessOffsetComments, Comment } from 'less-offset-comments';
 
 OnInit()
 {
-  this.comments: Comments[] = getFromBackend();
+  this.comments: Comment[] = getFromBackend();
 
   LessOffsetComments.init(this.comments);
 }
