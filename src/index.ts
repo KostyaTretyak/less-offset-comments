@@ -17,30 +17,21 @@ export interface Comment
   [key: string]: any;
 }
 
-@Directive({selector: '[less-offset-comments]'})
-export class LessOffsetCommentsDirective implements OnChanges
+export class LessOffsetComments
 {
-  @Input() comments: Comment[];
-  @Output() doOffset = new EventEmitter<Comment>();
-
-  ngOnChanges(simpleChanges: SimpleChanges)
+  static init(comments: Comment[])
   {
-    console.log(simpleChanges);
-
-    if
-    (
-      simpleChanges.comments.currentValue
-      && simpleChanges.comments.currentValue.length
-    )
-    {
-      this.comments.forEach( this.checkComment.bind(this) );
-    }
+    comments.forEach( this.checkComment.bind(this) );
   }
 
   /**
-   * Вставляє новий коментар на початок чи в кінець масиву коментарів.
+   * Inserts a new comment at the beginning or at the end of the comments array.
+   * 
+   * @param parent A parent comment.
+   * @param newChild A new comment that will be inserted into `parent.children` array.
+   * @param action An action that will be applied to the `parent.children` array.
    */
-  setComment(parent: Comment, newChild: Comment, action: 'unshift' | 'push')
+  static setComment(parent: Comment, newChild: Comment, action: 'unshift' | 'push')
   {
     const child1 = parent.children[0];
     parent.children[action](newChild);
@@ -57,13 +48,26 @@ export class LessOffsetCommentsDirective implements OnChanges
   }
 
   /**
-   * Видаляє конкретний коментар та оновлює зміщення сусідніх коментарів,
-   * враховуючи це видалення.
+   * Deletes a specific comment and updates the offset of neighboring comments,
+   * taking into account this deletion.
+   * 
+   * @param comments Array of all comments. Required to remove root comments.
+   * @param comment A comment for delete.
+   * @param index An index of comment in `parent.children` array for delete current comment.
    */
-  deleteComment(parent: Comment, index: number)
+  static deleteComment(comments: Comment[], comment: Comment, index: number)
   {
-    parent.children.splice(index, 1);
-    const child1 = parent.children[0];
+    if(!comment)
+    {
+      return;
+    }
+    else if(!comment.parent)
+    {
+      return comments.splice(index, 1);
+    }
+
+    comment.parent.children.splice(index, 1);
+    const child1 = comment.parent.children[0];
 
     if(child1)
     {
@@ -80,13 +84,9 @@ export class LessOffsetCommentsDirective implements OnChanges
   }
 
   /**
-   * Перевіряє кожен із коментарів на правила для виходу з компактного режиму.
-   * 
-   * Використовується безпосередньо при ініціалізації масиву коментарів.
-   * При вставці або видаленні конкретного коментаря,
-   * необхідно використовувати відповідно setComment() та deleteComment().
+   * Checks each comment on the rules for exiting "Compact Mode".
    */
-  checkComment(comment: Comment)
+  static checkComment(comment: Comment)
   {
     if(comment.compactMode && comment.parent)
     {
@@ -106,7 +106,6 @@ export class LessOffsetCommentsDirective implements OnChanges
       )
       {
         comment.compactMode = false;
-        this.doOffset.emit(comment);
       }
     }
   }
