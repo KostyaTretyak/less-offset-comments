@@ -135,26 +135,29 @@ class MyComponent
 
 ```
 
-And in your view like this (Angular code):
+And in your view like this pseudo-code:
 
 ```html
-<ng-container *ngFor="let comment of comments; index as i">
-  <li *ngIf="comment.compactMode">
-    <ng-container *ngTemplateOutlet="template; context: {comment: comment, index: i}"></ng-container>
+<ul>
+  <!-- You want to covered the following code in foreach -->
+
+  <li *if="comment.compactMode">
+    <!-- Your template for comment here -->
+    userId: {{ comment.userId }}
+    <button (click)="onSubmit(comment)">Sumbit</button>
+    <button (click)="onDelete(comment, index)">Delete</button>
   </li>
-  <li *ngIf="!comment.compactMode">
+  <li *if="!comment.compactMode">
     <ul>
-      <ng-container *ngTemplateOutlet="template; context: {comment: comment, index: i}"></ng-container>
+      <li>
+        <!-- Your template for comment here -->
+        userId: {{ comment.userId }}
+        <button (click)="onSubmit(comment)">Sumbit</button>
+        <button (click)="onDelete(comment, index)">Delete</button>
+      </li>
     </ul>
   </li>
-</ng-container>
 
-<ng-template let-comment="comment" let-index="index" #template>
-  <br>userId: {{ comment.userId }}
-  <br><input type="submit" (click)="onSubmit(comment)">
-  <br><input type="submit" (click)="onDelete(comment, index)" value="delete">
-  <thread [comments]="comment.children"></thread>
-</ng-template>
+  <!-- / end foreach -->
+</ul>
 ```
-
-Where `thread` is custom Angular component and this is its view.

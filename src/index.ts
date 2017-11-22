@@ -25,7 +25,7 @@ export class LessOffsetComments
   }
 
   /**
-   * Inserts a new comment at the beginning or at the end of the comments array.
+   * Inserts a new comment at the beginning or at the end of the `parent.children` array.
    * 
    * @param parent A parent comment.
    * @param newChild A new comment that will be inserted into `parent.children` array.
