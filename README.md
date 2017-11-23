@@ -50,7 +50,7 @@ user1
 
 What is the main idea here? Dialogs between two users may not be offseted.
 
-For all comments, this utility changes the property `compactMode` to `true` or to `false`.
+For all comments, this utility changes the property `hasOffset` to `true` or to `false`.
 A developer should rely on this property when rendering the comments.
 
 ## Install
@@ -108,10 +108,8 @@ class MyComponent
     const child: Comment =
     {
       userId: 111111,
-      level: parent.level + 1,
       parent: parent,
-      children: [],
-      compactMode: true
+      children: []
     };
 
     LessOffsetComments.setComment(parent, child, 'unshift');
@@ -131,13 +129,7 @@ And in your view like this pseudo-code:
 <ul>
   <!-- You want to covered the following code in foreach -->
 
-  <li *if="comment.compactMode">
-    <!-- Your template for comment here -->
-    userId: {{ comment.userId }}
-    <button (click)="onSubmit(comment)">Sumbit</button>
-    <button (click)="onDelete(comment, index)">Delete</button>
-  </li>
-  <li *if="!comment.compactMode">
+  <li *if="comment.hasOffset">
     <ul>
       <li>
         <!-- Your template for comment here -->
@@ -146,6 +138,12 @@ And in your view like this pseudo-code:
         <button (click)="onDelete(comment, index)">Delete</button>
       </li>
     </ul>
+  </li>
+  <li *if="!comment.hasOffset">
+    <!-- Your template for comment here -->
+    userId: {{ comment.userId }}
+    <button (click)="onSubmit(comment)">Sumbit</button>
+    <button (click)="onDelete(comment, index)">Delete</button>
   </li>
 
   <!-- / end foreach -->
