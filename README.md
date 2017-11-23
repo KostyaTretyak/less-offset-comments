@@ -69,17 +69,12 @@ To use this utility, your comments should be implemented this TypeScript interfa
 interface Comment
 {
   userId: number;
-  level: number;
-  parent: Comment;
   children: Comment[];
-  compactMode: boolean;
+  hasOffset?: boolean;
+  parent?: Comment;
   [key: string]: any;
 }
 ```
-
-- `compactMode` by default should have `true`
-- `level` start from `1`
-- `children` should always be an array
 
 ### Methods
 
@@ -157,7 +152,7 @@ And in your view like this pseudo-code:
 </ul>
 ```
 
-## Example usage with Angular 5
+## Example of usage with Angular 5
 
 Check out this [repository](https://github.com/KostyaTretyak/less-offset-comments-demo)
 specifically created for the [demo](https://kostyatretyak.github.io/less-offset-comments-demo/)

@@ -10,10 +10,9 @@ import {
 export interface Comment
 {
   userId: number;
-  level: number;
-  parent: Comment;
   children: Comment[];
-  compactMode: boolean;
+  hasOffset?: boolean;
+  parent?: Comment;
   [key: string]: any;
 }
 
@@ -68,13 +67,13 @@ export class LessOffsetComments
 
     if(child1)
     {
-      child1.compactMode = true;
+      delete child1.hasOffset;
       this.checkComment(child1);
 
       const child2 = child1.children[0];
       if(child2)
       {
-        child2.compactMode = true;
+        delete child2.hasOffset;
         this.checkComment(child2);
       }
     }
@@ -85,11 +84,11 @@ export class LessOffsetComments
    */
   static checkComment(comment: Comment): void
   {
-    if(comment.compactMode && comment.parent)
+    if(!comment.hasOffset && comment.parent)
     {
       if
       (
-        comment.parent.level == 1
+        !comment.parent.parent
         || comment.parent.children.length > 1
         ||
         (
@@ -102,7 +101,7 @@ export class LessOffsetComments
         )
       )
       {
-        comment.compactMode = false;
+        comment.hasOffset = true;
       }
     }
   }
