@@ -19,11 +19,6 @@ export interface Comment
 
 export class LessOffsetComments
 {
-  static init(comments: Comment[]): void
-  {
-    comments.forEach( this.checkComment.bind(this) );
-  }
-
   /**
    * Inserts a new comment at the beginning or at the end of the `parent.children` array.
    * 

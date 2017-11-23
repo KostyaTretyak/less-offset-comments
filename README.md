@@ -86,8 +86,6 @@ interface Comment
 All methods of this utility are called statically.
 
 ```ts
-static init(comments: Comment[]);
-
 static setComment(parent: Comment, newChild: Comment, action: 'unshift' | 'push');
 
 static deleteComment(comments: Comment[], comment: Comment, index: number);
@@ -97,7 +95,11 @@ static checkComment(comment: Comment);
 
 ## Usage
 
-Example of usage:
+When rendering comments, and when you walk through the comments tree,
+you should call `LessOffsetComments.checkComment()` for each of them.
+
+And then, for insert and delete a comment,
+you should using `LessOffsetComments.setComment()` and `LessOffsetComments.deleteComment()` like this:
 
 ```ts
 import { LessOffsetComments, Comment } from 'less-offset-comments';
@@ -105,13 +107,6 @@ import { LessOffsetComments, Comment } from 'less-offset-comments';
 class MyComponent
 {
   comments: Comment[];
-
-  onInit()
-  {
-    this.comments = getFromBackend();
-
-    LessOffsetComments.init(this.comments);
-  }
 
   onSubmit(parent: Comment)
   {
@@ -161,3 +156,8 @@ And in your view like this pseudo-code:
   <!-- / end foreach -->
 </ul>
 ```
+
+## Example usage with Angular 5
+
+Check out this [repository](https://github.com/KostyaTretyak/less-offset-comments-demo)
+specifically created for the [demo](https://kostyatretyak.github.io/less-offset-comments-demo/)
