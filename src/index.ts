@@ -42,8 +42,8 @@ export class LessOffsetComments
   }
 
   /**
-   * Deletes a specific comment and updates the offset of neighboring comments,
-   * taking into account this deletion.
+   * Deletes a specific comment and updates `hasOffset` propery
+   * of neighboring comments in `comment.parent.children`, taking into account this deletion.
    * 
    * @param comments Array of all comments. Required to remove root comments.
    * @param comment A comment for delete.
@@ -80,7 +80,8 @@ export class LessOffsetComments
   }
 
   /**
-   * Checks each comment on the rules for exiting from "Compact Mode".
+   * Checks each comment on the rules for exiting from "compact mode"
+   * and seting `hasOffset` to `true` in appropriate cases.
    */
   static checkComment(comment: Comment): void
   {
