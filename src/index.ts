@@ -1,12 +1,3 @@
-import {
-  Directive,
-  Input,
-  EventEmitter,
-  Output,
-  OnChanges,
-  SimpleChanges
-} from '@angular/core';
-
 export interface Comment
 {
   userId: number;

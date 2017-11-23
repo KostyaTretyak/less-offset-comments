@@ -16,10 +16,6 @@
   "bugs": {
     "url": "https://github.com/KostyaTretyak/less-offset-comments/issues"
   },
-  "devDependencies": {
-    "@angular/core": "^5.0.2",
-    "typescript": "^2.5.3"
-  },
   "keywords": [
     "comments",
     "nested-comments"
