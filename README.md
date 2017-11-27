@@ -2,7 +2,7 @@
 
 This is utility for less offset in nested comments.
 
-## Main idea of this "less offset comments"
+## Main idea
 
 Traditional tree-like comments may be as follows:
 
@@ -81,20 +81,24 @@ interface Comment
 All methods of this utility are called statically.
 
 ```ts
-static setComment(parent: Comment, newChild: Comment, action: 'unshift' | 'push');
+static hasOffset(comment: Comment): boolean;
 
-static deleteComment(comments: Comment[], comment: Comment, index: number);
+static updateOffset(comment: Comment): void;
 
-static checkComment(comment: Comment);
+static unshiftComment(parent: Comment, newChild: Comment): void;
+
+static pushComment(parent: Comment, newChild: Comment): void;
+
+static deleteComment(comments: Comment[], comment: Comment, index: number): void;
 ```
 
 ## Usage
 
 When rendering comments, and when you walk through the comments tree,
-you should call `LessOffsetComments.checkComment()` for each of them.
+you should call `LessOffsetComments.updateOffset()` for each of them.
 
 And then, for insert and delete a comment,
-you should using `LessOffsetComments.setComment()` and `LessOffsetComments.deleteComment()` like this:
+you should using `LessOffsetComments.unshiftComment()` and `LessOffsetComments.deleteComment()` like this:
 
 ```ts
 import { LessOffsetComments, Comment } from 'less-offset-comments';
@@ -112,7 +116,7 @@ class MyComponent
       children: []
     };
 
-    LessOffsetComments.setComment(parent, child, 'unshift');
+    LessOffsetComments.unshiftComment(parent, child);
   }
 
   onDelete(comment: Comment, index: number)
