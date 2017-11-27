@@ -52,7 +52,6 @@ export class LessOffsetComments
    * 
    * @param parent A parent comment.
    * @param newChild A new comment that will be inserted into `parent.children` array.
-   * @param action An action that will be applied to the `parent.children` array.
    */
   static unshiftComment(parent: Comment, newChild: Comment): void
   {
@@ -66,7 +65,6 @@ export class LessOffsetComments
    * 
    * @param parent A parent comment.
    * @param newChild A new comment that will be inserted into `parent.children` array.
-   * @param action An action that will be applied to the `parent.children` array.
    */
   static pushComment(parent: Comment, newChild: Comment): void
   {
