@@ -1,9 +1,9 @@
 export interface Comment
 {
   userId: number;
-  children: Comment[];
+  children: this[];
   hasOffset?: boolean;
-  parent?: Comment;
+  parent?: this;
   [key: string]: any;
 }
 

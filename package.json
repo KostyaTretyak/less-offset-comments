@@ -1,6 +1,6 @@
 {
   "name": "less-offset-comments",
-  "version": "1.0.0-beta.5",
+  "version": "1.0.0-beta.6",
   "description": "This is utility for less offset in nested comments.",
   "main": "dist/index",
   "typings": "src/index",

@@ -48,7 +48,7 @@ user1
         user2
 ```
 
-What is the main idea here? Dialogs between two users may not be offseted.
+What is the main idea here? Dialogue between two users may not be offset.
 
 For all comments, this utility changes the property `hasOffset` to `true` or to `false`.
 A developer should rely on this property when rendering the comments.
